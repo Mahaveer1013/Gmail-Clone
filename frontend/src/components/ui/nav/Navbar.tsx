@@ -1,47 +1,51 @@
-import { useState } from "react";
 import NavSearch from "./NavSearch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import { CgMenuGridO } from 'react-icons/cg'
+import { RxQuestionMarkCircled } from "react-icons/rx";
+import { IoSettingsOutline } from "react-icons/io5";
+import useWindowWidth from "../../../hooks/useWindowWidth";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const width = useWindowWidth();
+
+  const navigate = useNavigate();
 
   return (
-    <nav className="h-[64px] w-full flex items-center px-6">
-      <div className="flex justify-center items-center">
-        <div>
-          <div className="w-[22px] h-[2px] bg-black mb-1"></div>
-          <div className="w-[22px] h-[2px] bg-black mb-1"></div>
-          <div className="w-[22px] h-[2px] bg-black mb-1"></div>
+    <nav className={`h-[64px] w-full flex items-center px-4`}>
+      <div className="w-auto md:w-[20%] flex items-center">
+        <div className="flex flex-col justify-center items-center p-3 cursor-pointer rounded-full hover:bg-[#ddd]">
+          <div className="border-b-[2px] relative top-[3px] w-[18px] border-black mb-1"></div>
+          <div className="border-b-[2px] relative top-[3px] w-[18px] border-black mb-1"></div>
+          <div className="border-b-[2px] relative top-[3px] w-[18px] border-black mb-1"></div>
         </div>
-        <img src="/img/gmail_logo.png" alt="Gmail Logo" className="pl-6" />
+        <img src="/img/gmail_logo.png" alt="Gmail Logo" className="pl-3 cursor-pointer" onClick={() => navigate('/')} />
       </div>
-      <NavSearch />
-      <div className="flex items-center justify-center gap-x-8">
-        <FontAwesomeIcon icon={faQuestion} className="border-2 border-[#5f6368] w-5 h-5 p-[1px] text-[#5f6368] rounded-full" />
-        <FontAwesomeIcon icon={faGear} className="w-5 h-5 p-[1px] text-[#5f6368]" />
-        <div className="flex justify-between items-center w-5 h-5">
-          <div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-          </div>
-          <div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-          </div>
-          <div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-            <div className="bg-[#5f6368] rounded-full p-[2px] mb-[3px]"></div>
-          </div>
-        </div>
-        {/* <img /> */}
+      {width > 768 ? <NavSearch /> : <div className="flex flex-grow"></div>}
+      <div className="flex w-auto md:w-[20%] items-center justify-end">
+        {
+          width > 425
+          &&
+          <>
+            <span title="Question" className="w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#ddd] cursor-pointer">
+              <RxQuestionMarkCircled className="text-[#5f6368] w-5 h-5" />
+            </span>
+            <span className="w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#ddd] cursor-pointer">
+              <IoSettingsOutline className="text-[#5f6368] w-5 h-5" />
+            </span>
+            <span className="w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#ddd] cursor-pointer">
+              <CgMenuGridO className="text-[#5f6368] w-5 h-5" />
+            </span>
+          </>
+        }
+        <span className="w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#ddd] cursor-pointer">
+          <img
+            src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
+            alt="Image"
+            className="w-7 h-7 rounded-full bg-cover"
+          />
+        </span>
+
       </div>
     </nav>
   );
