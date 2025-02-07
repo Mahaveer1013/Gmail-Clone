@@ -5,15 +5,15 @@ import { RxQuestionMarkCircled } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 
-const Navbar = () => {
+const Navbar = ({setIsAsideOpen}) => {
 
   const width = useWindowWidth();
 
   const navigate = useNavigate();
 
   return (
-    <nav className={`h-[64px] w-full flex items-center px-4`}>
-      <div className="w-auto md:w-[20%] flex items-center">
+    <nav className={`h-[64px] w-full flex items-center px-4 fixed z-10 top-0 bg-[#f6f8fc]`}>
+      <div className="w-auto md:w-[20%] flex items-center" onClick={()=>setIsAsideOpen(prev=>!prev)}>
         <div className="flex flex-col justify-center items-center p-3 cursor-pointer rounded-full hover:bg-[#ddd]">
           <div className="border-b-[2px] relative top-[3px] w-[18px] border-black mb-1"></div>
           <div className="border-b-[2px] relative top-[3px] w-[18px] border-black mb-1"></div>
