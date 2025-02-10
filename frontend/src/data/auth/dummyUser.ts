@@ -7,5 +7,5 @@ export const user: authInterface = {
 };
 
 export const initialState: AuthState = {
-    user: null,
+    user,
 };
